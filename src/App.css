@@ -1,6 +1,8 @@
-.app {
+.page {
   background-color: #282c34;
   height:1000px;
+  color: white;
+  padding: 70px;
 }
 
 .app-header {
@@ -9,4 +11,20 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   background-color: white;
+  color: #282c34;
+}
+
+.content {
+  margin: 20px;
+}
+
+.add-item {
+  background-color:	#93eac4;
+  color: #282c34;
+  border-radius: 60px;
+  padding: 30px;
+  display:block;
+  width: 200px;
+  height: 50;
+  text-align: left;
 }

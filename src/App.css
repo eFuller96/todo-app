@@ -16,6 +16,7 @@
 
 .content {
   margin: 20px;
+  display: block;
 }
 
 .add-item {
@@ -23,16 +24,26 @@
   color: #282c34;
   border-radius: 60px;
   padding: 30px;
-  display:block;
   width: 200px;
   height: 50;
   text-align: left;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .items-list {
+  margin-left: 100px;
   background-color:	#6dc5df;
   color: #282c34;
   border-radius: 60px;
   padding: 30px;
-  text-align: center;
+  text-align: left;
+  width: 370px;
+  height: 200px;
+  display: inline-block;
+}
+
+.inner-items-list {
+  overflow-y: scroll;
+  max-height: 80%;
 }

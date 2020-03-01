@@ -23,23 +23,19 @@ const App = (() => {
   return <Container className='page'>
     <Header className='app-header'>Todo App</Header>
     <Divider />
-    <Grid className='content'>
+    <Grid columns={3} className='content'>
       <Grid.Row>
-        <Grid.Column>
-          <Container className='add-item'>
-            <Form>
-              <Form.Field>
-                <label>To Do:</label>
-                <Input placeholder='To do' value={itemToAdd} onChange={handleOnChange} />
-              </Form.Field>
-              <Button disabled={itemToAdd === ''} type='submit' onClick={handleOnSubmit}>Add</Button>
-            </Form>
-          </Container>
+        <Grid.Column width={1} className='add-item'>
+          <Form>
+            <Form.Field>
+              <Input placeholder='To do' value={itemToAdd} onChange={handleOnChange} />
+            </Form.Field>
+            <Button disabled={itemToAdd === ''} type='submit' onClick={handleOnSubmit}>Add</Button>
+          </Form>
         </Grid.Column>
-        <Grid.Column>
-          <Container className='items-list'>
-            <List items={itemList} />
-          </Container>
+        <Grid.Column width={2} className='items-list'>
+          <label>To Do:</label>
+          <List className='inner-items-list' items={itemList} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

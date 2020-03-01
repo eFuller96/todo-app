@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Header, Container, Form,
-  Button, Divider, Grid
+  Button, Divider, Grid,
+  Input
 } from 'semantic-ui-react'
 import './App.css';
 
 const App = (() => {
+  const [itemToAdd, setItemToAdd] = useState('')
+  const [itemList, setItemList] = useState([])
+
+  const handleOnSubmit = () => {
+    var newItemList = [...itemList, itemToAdd]
+    setItemList(newItemList)
+    setItemToAdd('')
+  }
+
+  const handleOnChange = (e) => {
+    setItemToAdd(e.target.value)
+  }
+
   return <Container className='page'>
     <Header className='app-header'>Todo App</Header>
     <Divider />
@@ -13,10 +27,10 @@ const App = (() => {
       <Container className='add-item'>
         <Form>
           <Form.Field>
-            <label>Item Name</label>
-            <input placeholder='Item Name' />
+            <label>To Do:</label>
+            <Input placeholder='To do' value={itemToAdd} onChange={handleOnChange} />
           </Form.Field>
-          <Button type='submit'>Add</Button>
+          <Button disabled={itemToAdd === ''} type='submit' onClick={handleOnSubmit}>Add</Button>
         </Form>
       </Container>
     </Grid>

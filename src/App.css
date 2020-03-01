@@ -16,7 +16,7 @@
 
 .content {
   margin: 20px;
-  display: block;
+  display: inline;
 }
 
 .add-item {
@@ -46,4 +46,9 @@
 .inner-items-list {
   overflow-y: scroll;
   max-height: 80%;
+}
+
+.remove-icon{
+  margin-left: auto;
+  cursor: pointer;
 }

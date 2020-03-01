@@ -20,6 +20,12 @@ const App = (() => {
     setItemToAdd(e.target.value)
   }
 
+  const removeItem = (indexToRemove) => {
+    var updatedItemList = [...itemList]
+    updatedItemList.splice(indexToRemove, 1)
+    setItemList(updatedItemList)
+  }
+
   return <Container className='page'>
     <Header className='app-header'>Todo App</Header>
     <Divider />
@@ -35,7 +41,14 @@ const App = (() => {
         </Grid.Column>
         <Grid.Column width={2} className='items-list'>
           <label>To Do:</label>
-          <List className='inner-items-list' items={itemList} />
+          <List className='inner-items-list'>
+            {itemList.map((item, index) => {
+              return <List.Item key={index + "-" + item}>
+                <div onClick={() => removeItem(index)} className='remove-icon'>x</div>
+                <List.Content>{item}</List.Content>
+              </List.Item>
+            })}
+          </List>
         </Grid.Column>
       </Grid.Row>
     </Grid>

@@ -28,3 +28,11 @@
   height: 50;
   text-align: left;
 }
+
+.items-list {
+  background-color:	#6dc5df;
+  color: #282c34;
+  border-radius: 60px;
+  padding: 30px;
+  text-align: center;
+}

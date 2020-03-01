@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   Header, Container, Form,
   Button, Divider, Grid,
-  Input
+  Input, List
 } from 'semantic-ui-react'
 import './App.css';
 
@@ -24,15 +24,24 @@ const App = (() => {
     <Header className='app-header'>Todo App</Header>
     <Divider />
     <Grid className='content'>
-      <Container className='add-item'>
-        <Form>
-          <Form.Field>
-            <label>To Do:</label>
-            <Input placeholder='To do' value={itemToAdd} onChange={handleOnChange} />
-          </Form.Field>
-          <Button disabled={itemToAdd === ''} type='submit' onClick={handleOnSubmit}>Add</Button>
-        </Form>
-      </Container>
+      <Grid.Row>
+        <Grid.Column>
+          <Container className='add-item'>
+            <Form>
+              <Form.Field>
+                <label>To Do:</label>
+                <Input placeholder='To do' value={itemToAdd} onChange={handleOnChange} />
+              </Form.Field>
+              <Button disabled={itemToAdd === ''} type='submit' onClick={handleOnSubmit}>Add</Button>
+            </Form>
+          </Container>
+        </Grid.Column>
+        <Grid.Column>
+          <Container className='items-list'>
+            <List items={itemList} />
+          </Container>
+        </Grid.Column>
+      </Grid.Row>
     </Grid>
   </Container>
 })

@@ -28,7 +28,7 @@
   vertical-align: top;
 }
 
-.items-list {
+.items-box {
   margin-left: 100px;
   background-color:	#6dc5df;
   color: #282c34;
@@ -40,7 +40,7 @@
   display: inline-block;
 }
 
-.inner-items-list {
+.items-scroll {
   overflow-y: scroll;
   max-height: 80%;
 }

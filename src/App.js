@@ -39,9 +39,9 @@ const App = (() => {
             <Button disabled={itemToAdd === ''} type='submit' onClick={handleOnSubmit}>Add</Button>
           </Form>
         </Grid.Column>
-        <Grid.Column width={2} className='items-list'>
+        <Grid.Column width={2} className='items-box'>
           <label>To Do:</label>
-          <List className='inner-items-list'>
+          <List className='items-scroll '>
             {itemList.map((item, index) => {
               return <List.Item key={index + "-" + item}>
                 <div onClick={() => removeItem(index)} className='remove-icon'>x</div>

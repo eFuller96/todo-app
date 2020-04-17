@@ -12,11 +12,8 @@
   font-size: calc(10px + 2vmin);
   background-color: white;
   color: #282c34;
-}
-
-.content {
-  margin: 20px;
-  display: inline;
+  padding:20px;
+  margin-bottom: 80px;
 }
 
 .add-item {

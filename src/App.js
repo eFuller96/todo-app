@@ -29,7 +29,7 @@ const App = (() => {
   return <Container className='page'>
     <Header className='app-header'>Todo App</Header>
     <Divider />
-    <Grid columns={3} className='content'>
+    <Grid columns={3}>
       <Grid.Row>
         <Grid.Column width={1} className='add-item'>
           <Form>

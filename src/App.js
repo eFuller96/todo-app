@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   Header, Container, Form,
   Button, Divider, Grid,
-  Input, List
+  Input, List, Checkbox
 } from 'semantic-ui-react'
 import './App.css';
 
@@ -44,8 +44,10 @@ const App = (() => {
           <List className='items-scroll '>
             {itemList.map((item, index) => {
               return <List.Item key={index + "-" + item}>
-                <div onClick={() => removeItem(index)} className='remove-icon'>x</div>
-                <List.Content>{item}</List.Content>
+                <List.Content className='list-item'>
+                  <Checkbox label={item} />
+                  <div onClick={() => removeItem(index)} className='remove-icon'>x</div>
+                </List.Content>
               </List.Item>
             })}
           </List>

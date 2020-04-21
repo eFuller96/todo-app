@@ -20,6 +20,17 @@ const App = (() => {
     setItemToAdd(e.target.value)
   }
 
+  const handleCheck = (indexToCheck) => {
+    var timeStamp = Date.now();
+    var updatedItemList = [...itemList]
+    var item = {
+      name: updatedItemList[indexToCheck],
+      completedTime: timeStamp
+    }
+    updatedItemList.splice(indexToCheck, 1)
+    
+  }
+
   const removeItem = (indexToRemove) => {
     var updatedItemList = [...itemList]
     updatedItemList.splice(indexToRemove, 1)
@@ -31,13 +42,15 @@ const App = (() => {
     <Divider />
     <Grid columns={3}>
       <Grid.Row>
-        <Grid.Column width={1} className='add-item'>
-          <Form>
-            <Form.Field>
-              <Input placeholder='To do' value={itemToAdd} onChange={handleOnChange} />
-            </Form.Field>
-            <Button disabled={itemToAdd === ''} type='submit' onClick={handleOnSubmit}>Add</Button>
-          </Form>
+        <Grid.Column width={1}>
+          <Grid.Row className='add-item'>
+            <Form>
+              <Form.Field>
+                <Input placeholder='To do' value={itemToAdd} onChange={handleOnChange} />
+              </Form.Field>
+              <Button disabled={itemToAdd === ''} type='submit' onClick={handleOnSubmit}>Add</Button>
+            </Form>
+          </Grid.Row>
         </Grid.Column>
         <Grid.Column width={2} className='items-box'>
           <label>To Do:</label>
@@ -45,7 +58,7 @@ const App = (() => {
             {itemList.map((item, index) => {
               return <List.Item key={index + "-" + item}>
                 <List.Content className='list-item'>
-                  <Checkbox label={item} />
+                  <Checkbox onClick={() => handleCheck(index)} label={item} />
                   <div onClick={() => removeItem(index)} className='remove-icon'>x</div>
                 </List.Content>
               </List.Item>

@@ -11,7 +11,12 @@ const App = (() => {
   const [itemList, setItemList] = useState([])
 
   const handleOnSubmit = () => {
-    var newItemList = [...itemList, itemToAdd]
+    const newItem = {
+      name: itemToAdd,
+      done: false,
+      completedTime: null
+    }
+    const newItemList = [...itemList, newItem]
     setItemList(newItemList)
     setItemToAdd('')
   }
@@ -21,20 +26,16 @@ const App = (() => {
   }
 
   const handleCheck = (indexToCheck) => {
-    var timeStamp = Date.now();
-    var updatedItemList = [...itemList]
-    var item = {
+    const timeStamp = Date.now();
+    const updatedItemList = [...itemList]
+    const item = {
       name: updatedItemList[indexToCheck],
       completedTime: timeStamp
     }
-    updatedItemList.splice(indexToCheck, 1)
-    
   }
 
   const removeItem = (indexToRemove) => {
-    var updatedItemList = [...itemList]
-    updatedItemList.splice(indexToRemove, 1)
-    setItemList(updatedItemList)
+    setItemList(itemList.filter((_, index) => (index !== indexToRemove)))
   }
 
   return <Container className='page'>
@@ -56,9 +57,9 @@ const App = (() => {
           <label>To Do:</label>
           <List className='items-scroll '>
             {itemList.map((item, index) => {
-              return <List.Item key={index + "-" + item}>
+              return <List.Item key={index}>
                 <List.Content className='list-item'>
-                  <Checkbox onClick={() => handleCheck(index)} label={item} />
+                  <Checkbox onClick={() => handleCheck(index)} label={item.name} />
                   <div onClick={() => removeItem(index)} className='remove-icon'>x</div>
                 </List.Content>
               </List.Item>

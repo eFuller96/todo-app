@@ -54,3 +54,15 @@
   display: flex;
   margin: 10px;
 }
+
+.time-stamp {
+  margin-left: auto;
+  font-size: small;
+  padding: 1px 0px;
+}
+
+.item-completed {
+  text-decoration: line-through;
+  color:  gray;
+  opacity: 0.5;
+}

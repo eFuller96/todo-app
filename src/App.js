@@ -5,6 +5,7 @@ import {
   Input, List, Checkbox
 } from 'semantic-ui-react'
 import './App.css';
+import moment from 'moment';
 
 const App = (() => {
   const [itemToAdd, setItemToAdd] = useState('')
@@ -17,6 +18,11 @@ const App = (() => {
       completedTime: null
     }
     const newItemList = [...itemList, newItem]
+    newItemList.sort((x) => {
+      if (x.done) {
+        return 1
+      }
+    })
     setItemList(newItemList)
     setItemToAdd('')
   }
@@ -26,12 +32,17 @@ const App = (() => {
   }
 
   const handleCheck = (indexToCheck) => {
-    const timeStamp = Date.now();
+    const timeStamp = moment(Date.now()).format('l') + ' ' + moment(Date.now()).format('LT')
     const updatedItemList = [...itemList]
-    const item = {
-      name: updatedItemList[indexToCheck],
-      completedTime: timeStamp
-    }
+    updatedItemList[indexToCheck].done = true
+    updatedItemList[indexToCheck].completedTime = timeStamp
+    updatedItemList.sort((x) => {
+      if (x.done) {
+        return 1
+      }
+    });
+
+    setItemList(updatedItemList)
   }
 
   const removeItem = (indexToRemove) => {
@@ -58,8 +69,9 @@ const App = (() => {
           <List className='items-scroll '>
             {itemList.map((item, index) => {
               return <List.Item key={index}>
-                <List.Content className='list-item'>
-                  <Checkbox onClick={() => handleCheck(index)} label={item.name} />
+                <List.Content className={`list-item ${item.done ? "item-completed" : ""}`}>
+                  <Checkbox checked={item.done} disabled={item.done} onClick={() => handleCheck(index)} label={item.name} />
+                  <div className='time-stamp'>{item.completedTime}</div>
                   <div onClick={() => removeItem(index)} className='remove-icon'>x</div>
                 </List.Content>
               </List.Item>

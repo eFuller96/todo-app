@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>todo_app</RootNamespace>
+    <UseAppHost>false</UseAppHost>
   </PropertyGroup>
 
 

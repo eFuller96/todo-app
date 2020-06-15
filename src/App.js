@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Header, Container, Form,
   Button, Divider, Grid,
   Input, List, Checkbox
 } from 'semantic-ui-react'
+import { getItems as getItemsAPI } from './api/items'
 import './App.css';
 import moment from 'moment';
 
 const App = (() => {
   const [itemToAdd, setItemToAdd] = useState('')
   const [itemList, setItemList] = useState([])
+
+  const getItems = async () => {
+    const response = await getItemsAPI()
+    if (response.status === 200) {
+      console.error("response: ", response)
+    }
+  }
+
+  useEffect(() => {
+    console.error("making api call")
+    getItems()
+  })
 
   const handleOnSubmit = () => {
     const newItem = {

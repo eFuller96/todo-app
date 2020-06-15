@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace todo_app.Controllers
 {
     [ApiController]
-    [Route("[items]")]
+    [Route("[controller]")]
     public class ItemController : ControllerBase
     {
         private readonly Item[] _items =

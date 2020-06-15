@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Header, Container, Form,
   Button, Divider, Grid,
   Input, List, Checkbox
 } from 'semantic-ui-react'
+import { getItems as getItemsAPI } from './api/items'
 import './App.css';
 import moment from 'moment';
 
@@ -11,18 +12,38 @@ const App = (() => {
   const [itemToAdd, setItemToAdd] = useState('')
   const [itemList, setItemList] = useState([])
 
+  const getItems = async () => {
+    let data = await getItemsAPI().then((response) => {
+      if (response.status === 200) {
+        return response.json()
+      }
+    })
+
+    if (data !== null) {
+      setItemList(data)
+    }
+  }
+
+  useEffect(() => {
+    getItems()
+  }, [])
+
   const handleOnSubmit = () => {
     const newItem = {
       name: itemToAdd,
       done: false,
       completedTime: null
     }
+
     const newItemList = [...itemList, newItem]
-    newItemList.sort((x) => {
-      if (x.done) {
+
+    newItemList.sort((item) => {
+      if (item.done) {
         return 1
       }
+      return 0
     })
+
     setItemList(newItemList)
     setItemToAdd('')
   }
@@ -40,6 +61,7 @@ const App = (() => {
       if (x.done) {
         return 1
       }
+      return 0
     });
 
     setItemList(updatedItemList)

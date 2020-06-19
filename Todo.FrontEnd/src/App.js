@@ -38,7 +38,7 @@ const App = (() => {
     const newItemList = [...itemList, newItem]
 
     newItemList.sort((item) => {
-      if (item.done) {
+      if (item.taskDone) {
         return 1
       }
       return 0
@@ -55,10 +55,10 @@ const App = (() => {
   const handleCheck = (indexToCheck) => {
     const timeStamp = moment(Date.now()).format('l') + ' ' + moment(Date.now()).format('LT')
     const updatedItemList = [...itemList]
-    updatedItemList[indexToCheck].done = true
+    updatedItemList[indexToCheck].taskDone = true
     updatedItemList[indexToCheck].completedTime = timeStamp
     updatedItemList.sort((x) => {
-      if (x.done) {
+      if (x.taskDone) {
         return 1
       }
       return 0
@@ -91,8 +91,8 @@ const App = (() => {
           <List className='items-scroll '>
             {itemList.map((item, index) => {
               return <List.Item key={index}>
-                <List.Content className={`list-item ${item.done ? "item-completed" : ""}`}>
-                  <Checkbox checked={item.done} disabled={item.done} onClick={() => handleCheck(index)} label={item.name} />
+                <List.Content className={`list-item ${item.taskDone ? "item-completed" : ""}`}>
+                  <Checkbox checked={item.taskDone} disabled={item.taskDone} onClick={() => handleCheck(index)} label={item.name} />
                   <div className='time-stamp'>{item.completedTime}</div>
                   <div onClick={() => removeItem(index)} className='remove-icon'>x</div>
                 </List.Content>

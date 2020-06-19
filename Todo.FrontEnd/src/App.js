@@ -74,9 +74,9 @@ const App = (() => {
   return <Container className='page'>
     <Header className='app-header'>Todo App</Header>
     <Divider />
-    <Grid columns={3}>
-      <Grid.Row>
-        <Grid.Column width={1}>
+    <Grid columns={2}>
+      <Grid.Row className='display-flex'>
+        <Grid.Column>
           <Grid.Row className='add-item'>
             <Form>
               <Form.Field>
@@ -86,7 +86,7 @@ const App = (() => {
             </Form>
           </Grid.Row>
         </Grid.Column>
-        <Grid.Column width={2} className='items-box'>
+        <Grid.Column className='items-box'>
           <label>To Do:</label>
           <List className='items-scroll '>
             {itemList.map((item, index) => {

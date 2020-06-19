@@ -66,3 +66,7 @@
   color:  gray;
   opacity: 0.5;
 }
+
+.display-flex {
+  display: flex;
+}

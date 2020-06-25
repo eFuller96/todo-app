@@ -1,3 +1,5 @@
+import config from '../config.js'
+
 const get = async (uri) => {
     return await fetch(uri, {
         method: 'GET',
@@ -7,7 +9,7 @@ const get = async (uri) => {
     })
 }
 
-const baseUrl = 'https://localhost:5001'
+const baseUrl = config.endpoint
 
 export async function getItems() {
     return await get(`${baseUrl}/item`)

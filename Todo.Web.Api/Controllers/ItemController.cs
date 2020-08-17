@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +8,7 @@ namespace todo_app.Controllers
     [Route("[controller]")]
     public class ItemController : ControllerBase
     {
-        private readonly Item[] _items =
+        private readonly List<Item> _items = new List<Item>()
         {
             new Item() {Name = "Pay rent"},
             new Item() {Name = "Food shopping"},

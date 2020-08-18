@@ -1,7 +1,7 @@
 import config from '../config.js'
 
-const get = async (uri) => {
-    return await fetch(uri, {
+const get = (uri) => {
+    return fetch(uri, {
         method: 'GET',
         headers: {
             'Access-Control-Allow-Origin': '*'
@@ -22,8 +22,8 @@ const post = (uri, payload) => {
 
 const baseUrl = "https://localhost:5001"
 
-export async function getItems() {
-    return await get(`${baseUrl}/item`)
+export function getItems() {
+    return get(`${baseUrl}/item`)
 }
 
 export function saveItem(payload) {

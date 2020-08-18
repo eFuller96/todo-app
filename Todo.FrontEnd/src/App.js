@@ -14,13 +14,12 @@ const App = (() => {
   const [itemList, setItemList] = useState([])
 
   const getItems = async () => {
-    let data = await getItemsAPI().then((response) => {
-      if (response.status === 200) {
-        return response.json()
-      }
-    })
-
-    if (data !== null) {
+    const response = await getItemsAPI()
+    if (!response.ok) {
+      throw new Error("HTTP status " + response.status);
+    }
+    const data = await response.json()
+    if (data) {
       setItemList(data)
     }
   }

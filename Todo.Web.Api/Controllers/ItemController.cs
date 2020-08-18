@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +19,13 @@ namespace todo_app.Controllers
         public IEnumerable<Item> GetAll()
         {
             return _items;
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] Item item)
+        {
+            _items.Add(item);
+            return new JsonResult(_items);
         }
     }
 }

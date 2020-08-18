@@ -5,6 +5,7 @@ import {
   Input, List, Checkbox
 } from 'semantic-ui-react'
 import { getItems as getItemsAPI } from './api/items'
+import { saveItem as saveItemAPI } from './api/items'
 import './App.css';
 import moment from 'moment';
 
@@ -28,24 +29,27 @@ const App = (() => {
     getItems()
   }, [])
 
-  const handleOnSubmit = () => {
+  const postItems = async (newItem) => {
+    const response = await saveItemAPI(newItem)
+    if (!response.ok) {
+      throw new Error("HTTP status " + response.status);
+    }
+    const data = await response.json()
+    if (data) {
+      const sortedList = data.sort((item) => (item.taskDone) ? 1 : 0)
+      setItemList(sortedList)
+    }
+    setItemToAdd('')
+  }
+
+  const handleOnSubmit = async () => {
     const newItem = {
       name: itemToAdd,
       done: false,
       completedTime: null
     }
 
-    const newItemList = [...itemList, newItem]
-
-    newItemList.sort((item) => {
-      if (item.taskDone) {
-        return 1
-      }
-      return 0
-    })
-
-    setItemList(newItemList)
-    setItemToAdd('')
+    postItems(newItem)
   }
 
   const handleOnChange = (e) => {

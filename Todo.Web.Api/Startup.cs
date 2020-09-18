@@ -26,7 +26,7 @@ namespace todo_app
                 .WriteTo.Console()
                 .CreateLogger();
             Log.Logger = logger;
-            
+
             services.AddControllers();
             services.AddCors(options =>
             {

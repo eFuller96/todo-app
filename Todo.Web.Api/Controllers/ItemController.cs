@@ -15,12 +15,16 @@ namespace todo_app.Controllers
         {
             _logger = logger;
         }
-        
+
         private readonly List<Item> _items = new List<Item>()
         {
             new Item() {Id = Guid.NewGuid(), Name = "Pay rent"},
             new Item() {Id = Guid.NewGuid(), Name = "Food shopping"},
-            new Item() {Id = Guid.NewGuid(), Name = "Wash car", CompletedTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm"), TaskDone = true}
+            new Item()
+            {
+                Id = Guid.NewGuid(), Name = "Wash car", CompletedTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm"),
+                TaskDone = true
+            }
         };
 
         [HttpGet]

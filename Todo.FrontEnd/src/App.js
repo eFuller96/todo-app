@@ -13,6 +13,7 @@ import {
 import { getItems as getItemsAPI } from "./api/items";
 import { saveItem as saveItemAPI } from "./api/items";
 import { updateItem as updateItemAPI } from "./api/items";
+import { deleteItem as deleteItemAPI } from "./api/items";
 import "./App.css";
 import moment from "moment";
 
@@ -60,6 +61,18 @@ const App = () => {
     }
   };
 
+  const deleteItem = async (itemToRemove) => {
+    const response = await deleteItemAPI(itemToRemove);
+    if (!response.ok) {
+      throw new Error("HTTP status " + response.status);
+    }
+    const data = await response.json();
+    if (data) {
+      const sortedList = data.sort((item) => (item.taskDone ? 1 : 0));
+      setItemList(sortedList);
+    }
+  };
+
   const handleOnSubmit = async () => {
     const newItem = {
       name: itemToAdd,
@@ -84,8 +97,8 @@ const App = () => {
     updateItem(item);
   };
 
-  const removeItem = (indexToRemove) => {
-    setItemList(itemList.filter((_, index) => index !== indexToRemove));
+  const removeItem = (item) => {
+    deleteItem(item);
   };
 
   return (
@@ -133,7 +146,7 @@ const App = () => {
                       />
                       <div className="time-stamp">{item.completedTime}</div>
                       <div
-                        onClick={() => removeItem(index)}
+                        onClick={() => removeItem(item)}
                         className="remove-icon"
                       >
                         x

@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace todo_app.Controllers
 {
@@ -8,6 +9,13 @@ namespace todo_app.Controllers
     [Route("[controller]")]
     public class ItemController : ControllerBase
     {
+        private readonly ILogger _logger;
+
+        public ItemController(ILogger logger)
+        {
+            _logger = logger;
+        }
+        
         private readonly List<Item> _items = new List<Item>()
         {
             new Item() {Id = Guid.NewGuid(), Name = "Pay rent"},

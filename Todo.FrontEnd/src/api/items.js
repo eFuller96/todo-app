@@ -20,6 +20,17 @@ const post = (uri, payload) => {
   });
 };
 
+const put = (uri, payload) => {
+  return fetch(uri, {
+    method: "PUT",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+};
+
 const baseUrl = "https://localhost:5001";
 
 export function getItems() {
@@ -28,4 +39,8 @@ export function getItems() {
 
 export function saveItem(payload) {
   return post(`${baseUrl}/item`, payload);
+}
+
+export function updateItem(payload) {
+  return put(`${baseUrl}/item`, payload);
 }

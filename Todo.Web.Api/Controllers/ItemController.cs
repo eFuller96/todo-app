@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -38,6 +39,17 @@ namespace todo_app.Controllers
         {
             item.Id = Guid.NewGuid();
             _items.Add(item);
+            return new JsonResult(_items);
+        }
+
+        [HttpPut]
+        public IActionResult Update([FromBody] Item updatedItem)
+        {
+            var indexOfItemToUpdate = _items.FindIndex(i => i.Id == updatedItem.Id);
+            if (indexOfItemToUpdate >= 0)
+            {
+                _items[indexOfItemToUpdate] = updatedItem;
+            }
             return new JsonResult(_items);
         }
     }

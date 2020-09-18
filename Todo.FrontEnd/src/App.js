@@ -12,6 +12,7 @@ import {
 } from "semantic-ui-react";
 import { getItems as getItemsAPI } from "./api/items";
 import { saveItem as saveItemAPI } from "./api/items";
+import { updateItem as updateItemAPI } from "./api/items";
 import "./App.css";
 import moment from "moment";
 
@@ -47,6 +48,18 @@ const App = () => {
     setItemToAdd("");
   };
 
+  const updateItem = async (itemToUpdate) => {
+    const response = await updateItemAPI(itemToUpdate);
+    if (!response.ok) {
+      throw new Error("HTTP status " + response.status);
+    }
+    const data = await response.json();
+    if (data) {
+      const sortedList = data.sort((item) => (item.taskDone ? 1 : 0));
+      setItemList(sortedList);
+    }
+  };
+
   const handleOnSubmit = async () => {
     const newItem = {
       name: itemToAdd,
@@ -64,17 +77,11 @@ const App = () => {
   const handleCheck = (indexToCheck) => {
     const timeStamp =
       moment(Date.now()).format("l") + " " + moment(Date.now()).format("LT");
-    const updatedItemList = [...itemList];
-    updatedItemList[indexToCheck].taskDone = true;
-    updatedItemList[indexToCheck].completedTime = timeStamp;
-    updatedItemList.sort((x) => {
-      if (x.taskDone) {
-        return 1;
-      }
-      return 0;
-    });
+    const item = itemList[indexToCheck];
+    item.taskDone = true;
+    item.completedTime = timeStamp;
 
-    setItemList(updatedItemList);
+    updateItemAPI(item);
   };
 
   const removeItem = (indexToRemove) => {

@@ -35,7 +35,7 @@ const App = () => {
     getItems();
   }, []);
 
-  const postItems = async (newItem) => {
+  const postItem = async (newItem) => {
     const response = await saveItemAPI(newItem);
     if (!response.ok) {
       throw new Error("HTTP status " + response.status);
@@ -67,7 +67,7 @@ const App = () => {
       completedTime: null,
     };
 
-    postItems(newItem);
+    postItem(newItem);
   };
 
   const handleOnChange = (e) => {

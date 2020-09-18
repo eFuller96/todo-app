@@ -81,7 +81,7 @@ const App = () => {
     item.taskDone = true;
     item.completedTime = timeStamp;
 
-    updateItemAPI(item);
+    updateItem(item);
   };
 
   const removeItem = (indexToRemove) => {

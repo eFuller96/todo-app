@@ -52,5 +52,12 @@ namespace todo_app.Controllers
             }
             return new JsonResult(_items);
         }
+
+        [HttpDelete]
+        public IActionResult Delete([FromBody] Item itemToDelete)
+        {
+            _items.Remove(itemToDelete);
+            return new JsonResult(_items);
+        }
     }
 }

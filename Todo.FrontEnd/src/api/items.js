@@ -31,6 +31,17 @@ const put = (uri, payload) => {
   });
 };
 
+const delete = (uri, payload) => {
+  return fetch(uri, {
+    method: "DELETE",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+};
+
 const baseUrl = "https://localhost:5001";
 
 export function getItems() {
@@ -43,4 +54,8 @@ export function saveItem(payload) {
 
 export function updateItem(payload) {
   return put(`${baseUrl}/item`, payload);
+}
+
+export function deleteItem(payload) {
+  return delete (`${baseUrl}/item`, payload);
 }

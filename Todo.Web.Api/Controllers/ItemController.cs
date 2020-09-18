@@ -34,7 +34,7 @@ namespace todo_app.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Item item)
+        public IActionResult Add([FromBody] Item item)
         {
             item.Id = Guid.NewGuid();
             _items.Add(item);

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using todo_app.Store;
 
 namespace todo_app.Controllers
 {
@@ -11,22 +11,14 @@ namespace todo_app.Controllers
     public class ItemController : ControllerBase
     {
         private readonly ILogger _logger;
+        private readonly List<Item> _items;
 
-        public ItemController(ILogger logger)
+        public ItemController(IItemStore itemStore, ILogger logger)
         {
             _logger = logger;
+            _items = itemStore.GetStartingItems();
         }
 
-        private readonly List<Item> _items = new List<Item>()
-        {
-            new Item() {Id = Guid.NewGuid(), Name = "Pay rent"},
-            new Item() {Id = Guid.NewGuid(), Name = "Food shopping"},
-            new Item()
-            {
-                Id = Guid.NewGuid(), Name = "Wash car", CompletedTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm"),
-                TaskDone = true
-            }
-        };
 
         [HttpGet]
         public IEnumerable<Item> GetAll()

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using todo_app.Store;
 
 namespace todo_app
 {
@@ -34,6 +35,7 @@ namespace todo_app
                     builder => { builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); });
             });
             services.AddSingleton(Log.Logger);
+            services.AddSingleton(typeof(IItemStore));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

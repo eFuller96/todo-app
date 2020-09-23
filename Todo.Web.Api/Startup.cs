@@ -35,7 +35,7 @@ namespace todo_app
                     builder => { builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); });
             });
             services.AddSingleton(Log.Logger);
-            services.AddSingleton(typeof(IItemStore));
+            services.AddSingleton<ItemStore>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

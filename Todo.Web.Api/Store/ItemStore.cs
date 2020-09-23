@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace todo_app.Store
 {
-    public class ItemStore : IItemStore
+    public class ItemStore
     {
         public List<Item> GetStartingItems()
         {
@@ -21,12 +21,8 @@ namespace todo_app.Store
 
         public ItemStore()
         {
-            
+
         }
     }
 
-    public interface IItemStore
-    {
-        List<Item> GetStartingItems();
-    }
 }

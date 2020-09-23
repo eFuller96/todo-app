@@ -13,7 +13,7 @@ namespace todo_app.Controllers
         private readonly ILogger _logger;
         private readonly List<Item> _items;
 
-        public ItemController(IItemStore itemStore, ILogger logger)
+        public ItemController(ItemStore itemStore, ILogger logger)
         {
             _logger = logger;
             _items = itemStore.GetStartingItems();

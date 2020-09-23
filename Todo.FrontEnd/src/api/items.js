@@ -31,7 +31,7 @@ const put = (uri, payload) => {
   });
 };
 
-const delete = (uri, payload) => {
+const remove = (uri, payload) => {
   return fetch(uri, {
     method: "DELETE",
     headers: {
@@ -57,5 +57,5 @@ export function updateItem(payload) {
 }
 
 export function deleteItem(payload) {
-  return delete (`${baseUrl}/item`, payload);
+  return remove(`${baseUrl}/item`, payload);
 }

@@ -5,15 +5,16 @@ namespace todo_app.Store
 {
     public class ItemStore
     {
-        public List<Item> GetStartingItems()
+        public Dictionary<Guid, Item> GetStartingItems()
         {
-            return new List<Item>()
+            return new Dictionary<Guid, Item>()
             {
-                new Item() {Id = Guid.NewGuid(), Name = "Pay rent"},
-                new Item() {Id = Guid.NewGuid(), Name = "Food shopping"},
-                new Item()
+                [Guid.NewGuid()] = new Item() { Name = "Pay rent"},
+                [Guid.NewGuid()] = new Item() { Name = "Food shopping"},
+                [Guid.NewGuid()] = new Item()
                 {
-                    Id = Guid.NewGuid(), Name = "Wash car", CompletedTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm"),
+                    Name = "Wash car",
+                    CompletedTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm"),
                     TaskDone = true
                 }
             };

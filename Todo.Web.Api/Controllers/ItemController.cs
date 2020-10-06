@@ -11,7 +11,7 @@ namespace todo_app.Controllers
     public class ItemController : ControllerBase
     {
         private readonly ILogger _logger;
-        private readonly List<Item> _items;
+        private readonly Dictionary<Guid, Item> _items;
 
         public ItemController(ItemStore itemStore, ILogger logger)
         {

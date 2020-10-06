@@ -34,13 +34,9 @@ namespace todo_app.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] Item updatedItem)
+        public IActionResult Update([FromBody] KeyValuePair<Guid, Item> updatedItem)
         {
-            var indexOfItemToUpdate = _items.FindIndex(i => i.Id == updatedItem.Id);
-            if (indexOfItemToUpdate >= 0)
-            {
-                _items[indexOfItemToUpdate] = updatedItem;
-            }
+            _items[updatedItem.Key] = updatedItem.Value;
             return new JsonResult(_items);
         }
 

@@ -130,7 +130,7 @@ const App = () => {
           <Grid.Column className="items-box">
             <label>To Do:</label>
             <List className="items-scroll ">
-              {itemList.map((item, index) => {
+              {Object.values(itemList).map((item, index) => {
                 return (
                   <List.Item key={index}>
                     <List.Content

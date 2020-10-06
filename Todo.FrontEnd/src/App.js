@@ -134,9 +134,8 @@ const App = () => {
                 return (
                   <List.Item key={index}>
                     <List.Content
-                      className={`list-item ${
-                        item.taskDone ? "item-completed" : ""
-                      }`}
+                      className={`list-item ${item.taskDone ? "item-completed" : ""
+                        }`}
                     >
                       <Checkbox
                         checked={item.taskDone}

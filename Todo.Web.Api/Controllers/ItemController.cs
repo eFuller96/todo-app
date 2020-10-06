@@ -41,9 +41,9 @@ namespace todo_app.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete([FromBody] Item itemToDelete)
+        public IActionResult Delete([FromBody] KeyValuePair<Guid, Item> itemToDelete)
         {
-            _items.Remove(itemToDelete);
+            _items.Remove(itemToDelete.Key);
             return new JsonResult(_items);
         }
     }

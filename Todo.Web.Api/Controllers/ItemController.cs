@@ -11,7 +11,7 @@ namespace todo_app.Controllers
     public class ItemController : ControllerBase
     {
         private readonly ILogger _logger;
-        private readonly Dictionary<Guid, Item> _items;
+        private readonly Dictionary<string, Item> _items;
 
         public ItemController(ItemStore itemStore, ILogger logger)
         {
@@ -21,7 +21,7 @@ namespace todo_app.Controllers
 
 
         [HttpGet]
-        public Dictionary<Guid, Item> GetAll()
+        public Dictionary<string, Item> GetAll()
         {
             return _items;
         }
@@ -29,19 +29,19 @@ namespace todo_app.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] Item item)
         {
-            _items.Add(Guid.NewGuid(), item);
+            _items.Add(Guid.NewGuid().ToString(), item);
             return new JsonResult(_items);
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] KeyValuePair<Guid, Item> updatedItem)
+        public IActionResult Update([FromBody] KeyValuePair<string, Item> updatedItem)
         {
             _items[updatedItem.Key] = updatedItem.Value;
             return new JsonResult(_items);
         }
 
         [HttpDelete]
-        public IActionResult Delete([FromBody] KeyValuePair<Guid, Item> itemToDelete)
+        public IActionResult Delete([FromBody] KeyValuePair<string, Item> itemToDelete)
         {
             _items.Remove(itemToDelete.Key);
             return new JsonResult(_items);

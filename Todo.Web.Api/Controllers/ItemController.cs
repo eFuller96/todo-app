@@ -21,7 +21,7 @@ namespace todo_app.Controllers
 
 
         [HttpGet]
-        public IEnumerable<Item> GetAll()
+        public Dictionary<Guid, Item> GetAll()
         {
             return _items;
         }

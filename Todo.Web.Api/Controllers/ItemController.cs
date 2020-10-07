@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Serilog;
 using todo_app.Store;
 
@@ -34,16 +36,17 @@ namespace todo_app.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] KeyValuePair<string, Item> updatedItem)
+        public IActionResult Update([FromBody] IDictionary<string, Item> updatedItemList)
         {
-            _items[updatedItem.Key] = updatedItem.Value;
+            var (key, value) = updatedItemList.First();
+            _items[key] = value;
             return new JsonResult(_items);
         }
 
         [HttpDelete]
-        public IActionResult Delete([FromBody] KeyValuePair<string, Item> itemToDelete)
+        public IActionResult Delete([FromBody]string itemToDeleteKey)
         {
-            _items.Remove(itemToDelete.Key);
+            _items.Remove(itemToDeleteKey);
             return new JsonResult(_items);
         }
     }

@@ -43,7 +43,7 @@ const App = () => {
     }
     const data = await response.json();
     if (data) {
-      const sortedList = data.sort((item) => (item.taskDone ? 1 : 0));
+      const sortedList = Object.values(data).sort((item) => (item.taskDone ? 1 : 0));
       setItemList(sortedList);
     }
     setItemToAdd("");
@@ -56,19 +56,20 @@ const App = () => {
     }
     const data = await response.json();
     if (data) {
-      const sortedList = data.sort((item) => (item.taskDone ? 1 : 0));
+      const sortedList = Object.values(data).sort((item) => (item.taskDone ? 1 : 0));
       setItemList(sortedList);
     }
   };
 
   const deleteItem = async (itemToRemove) => {
-    const response = await deleteItemAPI(itemToRemove);
+    const itemKey = Object.keys(itemToRemove)[0]
+    const response = await deleteItemAPI(itemKey);
     if (!response.ok) {
       throw new Error("HTTP status " + response.status);
     }
     const data = await response.json();
     if (data) {
-      const sortedList = data.sort((item) => (item.taskDone ? 1 : 0));
+      const sortedList = Object.values(data).sort((item) => (item.taskDone ? 1 : 0));
       setItemList(sortedList);
     }
   };
@@ -87,14 +88,17 @@ const App = () => {
     setItemToAdd(e.target.value);
   };
 
-  const handleCheck = (indexToCheck) => {
+  const handleCheck = (key) => {
     const timeStamp =
       moment(Date.now()).format("l") + " " + moment(Date.now()).format("LT");
-    const item = itemList[indexToCheck];
+    const item = itemList[key];
+
     item.taskDone = true;
     item.completedTime = timeStamp;
 
-    updateItem(item);
+    const keyValueItem = {};
+    keyValueItem[key] = item;
+    updateItem(keyValueItem);
   };
 
   const removeItem = (item) => {
@@ -145,7 +149,7 @@ const App = () => {
                       />
                       <div className="time-stamp">{value.completedTime}</div>
                       <div
-                        onClick={() => removeItem(value)}
+                        onClick={() => removeItem(({ [key]: value }))}
                         className="remove-icon"
                       >
                         x

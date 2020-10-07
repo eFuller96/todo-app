@@ -21,6 +21,7 @@ const post = (uri, payload) => {
 };
 
 const put = (uri, payload) => {
+  console.error('payload: ', payload)
   return fetch(uri, {
     method: "PUT",
     headers: {
@@ -38,7 +39,7 @@ const remove = (uri, payload) => {
       "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(payload)
   });
 };
 

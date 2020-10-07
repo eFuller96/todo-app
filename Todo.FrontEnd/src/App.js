@@ -130,22 +130,22 @@ const App = () => {
           <Grid.Column className="items-box">
             <label>To Do:</label>
             <List className="items-scroll ">
-              {Object.values(itemList).map((item, index) => {
+              {Object.entries(itemList).map(([key, value]) => {
                 return (
-                  <List.Item key={index}>
+                  <List.Item key={key} >
                     <List.Content
-                      className={`list-item ${item.taskDone ? "item-completed" : ""
+                      className={`list-item ${value.taskDone ? "item-completed" : ""
                         }`}
                     >
                       <Checkbox
-                        checked={item.taskDone}
-                        disabled={item.taskDone}
-                        onClick={() => handleCheck(index)}
-                        label={item.name}
+                        checked={value.taskDone}
+                        disabled={value.taskDone}
+                        onClick={() => handleCheck(key)}
+                        label={value.name}
                       />
-                      <div className="time-stamp">{item.completedTime}</div>
+                      <div className="time-stamp">{value.completedTime}</div>
                       <div
-                        onClick={() => removeItem(item)}
+                        onClick={() => removeItem(value)}
                         className="remove-icon"
                       >
                         x

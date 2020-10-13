@@ -5,9 +5,15 @@ namespace todo_app.Store
 {
     public class ItemStore
     {
+        private static Dictionary<string, Item> Items { get; set; }
         public Dictionary<string, Item> GetStartingItems()
         {
-            return new Dictionary<string, Item>()
+            return Items;
+        }
+
+        public static void PopulateItems()
+        {
+            Items = new Dictionary<string, Item>()
             {
                 [Guid.NewGuid().ToString()] = new Item() { Name = "Pay rent"},
                 [Guid.NewGuid().ToString()] = new Item() { Name = "Food shopping"},
@@ -19,11 +25,5 @@ namespace todo_app.Store
                 }
             };
         }
-
-        public ItemStore()
-        {
-
-        }
     }
-
 }

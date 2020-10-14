@@ -36,7 +36,6 @@ namespace todo_app
             });
             services.AddSingleton(Log.Logger);
             services.AddSingleton<ItemStore>();
-            ItemStore.PopulateItems();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

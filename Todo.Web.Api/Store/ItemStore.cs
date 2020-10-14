@@ -5,15 +5,20 @@ namespace todo_app.Store
 {
     public class ItemStore
     {
-        private static Dictionary<string, Item> Items { get; set; }
-        public Dictionary<string, Item> GetStartingItems()
+        private IDictionary<string, Item> Items { get; }
+        public IDictionary<string, Item> GetItems()
         {
             return Items;
         }
 
-        public static void PopulateItems()
+        public ItemStore()
         {
-            Items = new Dictionary<string, Item>()
+            Items = PopulateItems();
+        }
+
+        private static IDictionary<string, Item> PopulateItems()
+        {
+            return new Dictionary<string, Item>()
             {
                 [Guid.NewGuid().ToString()] = new Item() { Name = "Pay rent"},
                 [Guid.NewGuid().ToString()] = new Item() { Name = "Food shopping"},

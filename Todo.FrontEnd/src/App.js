@@ -43,8 +43,7 @@ const App = () => {
     }
     const data = await response.json();
     if (data) {
-      const sortedList = Object.values(data).sort((item) => (item.taskDone ? 1 : 0));
-      setItemList(sortedList);
+      setItemList(Object.values(data));
     }
     setItemToAdd("");
   };

@@ -29,15 +29,16 @@ namespace todo_app.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] Item item)
         {
-            _items.Add(Guid.NewGuid().ToString(), item);
+            var newId = Guid.NewGuid().ToString();
+            item.Id = newId;
+            _items.Add(newId, item);
             return new JsonResult(_items);
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] IDictionary<string, Item> updatedItemList)
+        public IActionResult Update([FromBody] Item updatedItem)
         {
-            var (key, value) = updatedItemList.First();
-            _items[key] = value;
+            _items[updatedItem.Id] = updatedItem;
             return new JsonResult(_items);
         }
 

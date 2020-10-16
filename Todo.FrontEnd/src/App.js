@@ -55,8 +55,7 @@ const App = () => {
     }
     const data = await response.json();
     if (data) {
-      const sortedList = Object.values(data).sort((item) => (item.taskDone ? 1 : 0));
-      setItemList(sortedList);
+      setItemList(Object.values(data));
     }
   };
 
@@ -85,17 +84,14 @@ const App = () => {
     setItemToAdd(e.target.value);
   };
 
-  const handleCheck = (key) => {
+  const handleCheck = (item) => {
     const timeStamp =
       moment(Date.now()).format("l") + " " + moment(Date.now()).format("LT");
-    const item = itemList[key];
 
     item.taskDone = true;
     item.completedTime = timeStamp;
 
-    const keyValueItem = {};
-    keyValueItem[key] = item;
-    updateItem(keyValueItem);
+    updateItem(item);
   };
 
   const removeItem = (item) => {

@@ -62,15 +62,13 @@ const App = () => {
   };
 
   const deleteItem = async (itemToRemove) => {
-    const itemKey = Object.keys(itemToRemove)[0]
-    const response = await deleteItemAPI(itemKey);
+    const response = await deleteItemAPI(itemToRemove.id);
     if (!response.ok) {
       throw new Error("HTTP status " + response.status);
     }
     const data = await response.json();
     if (data) {
-      const sortedList = Object.values(data).sort((item) => (item.taskDone ? 1 : 0));
-      setItemList(sortedList);
+      setItemList(Object.values(data));
     }
   };
 
@@ -134,22 +132,22 @@ const App = () => {
           <Grid.Column className="items-box">
             <label>To Do:</label>
             <List className="items-scroll ">
-              {Object.entries(itemList).map(([key, value]) => {
+              {itemList.map((item, key) => {
                 return (
                   <List.Item key={key} >
                     <List.Content
-                      className={`list-item ${value.taskDone ? "item-completed" : ""
+                      className={`list-item ${item.taskDone ? "item-completed" : ""
                         }`}
                     >
                       <Checkbox
-                        checked={value.taskDone}
-                        disabled={value.taskDone}
-                        onClick={() => handleCheck(key)}
-                        label={value.name}
+                        checked={item.taskDone}
+                        disabled={item.taskDone}
+                        onClick={() => handleCheck(item)}
+                        label={item.name}
                       />
-                      <div className="time-stamp">{value.completedTime}</div>
+                      <div className="time-stamp">{item.completedTime}</div>
                       <div
-                        onClick={() => removeItem(({ [key]: value }))}
+                        onClick={() => removeItem(item)}
                         className="remove-icon"
                       >
                         x

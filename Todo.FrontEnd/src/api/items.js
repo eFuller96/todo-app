@@ -21,7 +21,6 @@ const post = (uri, payload) => {
 };
 
 const put = (uri, payload) => {
-  console.error('payload: ', payload)
   return fetch(uri, {
     method: "PUT",
     headers: {

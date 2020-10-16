@@ -21,6 +21,10 @@ const App = () => {
   const [itemToAdd, setItemToAdd] = useState("");
   const [itemList, setItemList] = useState([]);
 
+  useEffect(() => {
+    getItems();
+  }, []);
+
   const getItems = async () => {
     const response = await getItemsAPI();
     if (!response.ok) {
@@ -28,13 +32,9 @@ const App = () => {
     }
     const data = await response.json();
     if (data) {
-      setItemList(data);
+      setItemList(Object.values(data));
     }
   };
-
-  useEffect(() => {
-    getItems();
-  }, []);
 
   const postItem = async (newItem) => {
     const response = await saveItemAPI(newItem);

@@ -32,7 +32,8 @@ const App = () => {
     }
     const data = await response.json();
     if (data) {
-      setItemList(Object.values(data));
+      const sortedList = Object.values(data).sort((item) => (item.taskDone ? 1 : 0))
+      setItemList(sortedList);
     }
   };
 
@@ -43,7 +44,8 @@ const App = () => {
     }
     const data = await response.json();
     if (data) {
-      setItemList(Object.values(data));
+      const sortedList = Object.values(data).sort((item) => (item.taskDone ? 1 : 0));
+      setItemList(Object.values(sortedList));
     }
     setItemToAdd("");
   };
@@ -55,7 +57,8 @@ const App = () => {
     }
     const data = await response.json();
     if (data) {
-      setItemList(Object.values(data));
+      const sortedList = Object.values(data).sort((item) => (item.taskDone ? 1 : 0))
+      setItemList(sortedList);
     }
   };
 
@@ -66,7 +69,8 @@ const App = () => {
     }
     const data = await response.json();
     if (data) {
-      setItemList(Object.values(data));
+      const sortedList = Object.values(data).sort((item) => (item.taskDone ? 1 : 0))
+      setItemList(sortedList);
     }
   };
 

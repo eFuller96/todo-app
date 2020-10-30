@@ -14,7 +14,7 @@ namespace todo_app.Controllers
         private readonly ILogger _logger;
         private readonly IDictionary<string, Item> _items;
 
-        public ItemController(ItemStore itemStore, ILogger logger)
+        public ItemController(IItemStore itemStore, ILogger logger)
         {
             _logger = logger;
             _items = itemStore.GetItems();

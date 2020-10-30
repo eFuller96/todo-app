@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace todo_app.Store
 {
-    public class ItemStore
+    public class ItemStore : IItemStore
     {
         private IDictionary<string, Item> Items { get; }
         public IDictionary<string, Item> GetItems()
@@ -35,5 +35,10 @@ namespace todo_app.Store
                 }
             };
         }
+    }
+
+    public interface IItemStore
+    {
+        IDictionary<string, Item> GetItems();
     }
 }

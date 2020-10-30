@@ -1,3 +1,4 @@
+using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -35,7 +36,6 @@ namespace todo_app
                     builder => { builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); });
             });
             services.AddSingleton(Log.Logger);
-            services.AddSingleton<ItemStore>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +58,11 @@ namespace todo_app
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new ItemModule());
         }
     }
 }

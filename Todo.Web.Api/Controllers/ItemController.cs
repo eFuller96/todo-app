@@ -12,18 +12,18 @@ namespace todo_app.Controllers
     public class ItemController : ControllerBase
     {
         private readonly ILogger _logger;
-        private readonly IDictionary<string, Item> _items;
+        private readonly IItemStore _itemStore;
 
         public ItemController(IItemStore itemStore, ILogger logger)
         {
+            _itemStore = itemStore;
             _logger = logger;
-            _items = itemStore.GetItems();
         }
 
         [HttpGet]
         public IDictionary<string, Item> GetAll()
         {
-            return _items;
+            return _itemStore.GetItems();
         }
 
         [HttpPost]

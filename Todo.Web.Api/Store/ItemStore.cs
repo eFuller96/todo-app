@@ -1,16 +1,12 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
+using Dapper;
+using Npgsql;
 
 namespace todo_app.Store
 {
     public class ItemStore : IItemStore
     {
-        private IDictionary<string, Item> Items { get; }
-        public IDictionary<string, Item> GetItems()
-        {
-            return Items;
-        }
-
         private readonly string _dbConnectionString;
 
         public ItemStore(string dbConnectionString)
@@ -18,24 +14,13 @@ namespace todo_app.Store
             _dbConnectionString = dbConnectionString;
         }
 
-        private static IDictionary<string, Item> PopulateItems()
+        public IDictionary<string, Item> GetItems()
         {
-            var key1 = Guid.NewGuid().ToString();
-            var key2 = Guid.NewGuid().ToString();
-            var key3 = Guid.NewGuid().ToString();
-            
-            return new Dictionary<string, Item>()
+            using (var conn = new NpgsqlConnection(_dbConnectionString))
             {
-                [key1] = new Item() { Id = key1, Name = "Pay rent"},
-                [key2] = new Item() { Id = key2, Name = "Food shopping"},
-                [key3] = new Item()
-                {
-                    Id = key3,
-                    Name = "Wash car",
-                    CompletedTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm"),
-                    TaskDone = true
-                }
-            };
+                var items = conn.Query<Item>("SELECT * FROM items;");
+                return items.ToDictionary(item => item.Id.ToString(), item => item);
+            }
         }
     }
 }

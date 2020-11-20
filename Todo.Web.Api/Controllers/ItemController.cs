@@ -31,8 +31,8 @@ namespace todo_app.Controllers
         {
             var newId = Guid.NewGuid().ToString();
             item.Id = newId;
-            _items.Add(newId, item);
-            return new JsonResult(_items);
+            _itemStore.AddItem(item);
+            return new JsonResult(_itemStore.GetItems());
         }
 
         [HttpPut]

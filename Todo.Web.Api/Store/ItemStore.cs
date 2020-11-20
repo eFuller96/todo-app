@@ -22,5 +22,17 @@ namespace todo_app.Store
                 return items.ToDictionary(item => item.Id.ToString(), item => item);
             }
         }
+
+        public void AddItem(Item item)
+        {
+            using (var conn = new NpgsqlConnection(_dbConnectionString))
+            {
+                conn.Execute("INSERT INTO items (id, name) VALUES (@id, @name);", new
+                {
+                    item.Id,
+                    item.Name
+                });
+            }
+        }
     }
 }

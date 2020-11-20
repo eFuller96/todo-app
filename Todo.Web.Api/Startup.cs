@@ -62,7 +62,7 @@ namespace todo_app
             Log.Logger = logger;
 
             builder.RegisterInstance(Log.Logger).SingleInstance().As<ILogger>();
-            builder.RegisterModule(new ItemModule());
+            builder.RegisterModule(new ItemModule(Configuration["DatabaseConnectionString"]));
         }
     }
 }

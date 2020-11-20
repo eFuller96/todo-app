@@ -11,9 +11,11 @@ namespace todo_app.Store
             return Items;
         }
 
-        public ItemStore()
+        private readonly string _dbConnectionString;
+
+        public ItemStore(string dbConnectionString)
         {
-            Items = PopulateItems();
+            _dbConnectionString = dbConnectionString;
         }
 
         private static IDictionary<string, Item> PopulateItems()

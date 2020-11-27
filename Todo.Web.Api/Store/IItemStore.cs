@@ -7,5 +7,6 @@ namespace todo_app.Store
         IDictionary<string, Item> GetItems();
         void AddItem(Item item);
         void UpdateItem(Item item);
+        void DeleteItem(string id);
     }
 }

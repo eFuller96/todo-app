@@ -47,5 +47,16 @@ namespace todo_app.Store
                 });
             }
         }
+
+        public void DeleteItem(string id)
+        {
+            using (var conn = new NpgsqlConnection(_dbConnectionString))
+            {
+                conn.Execute("DELETE FROM items WHERE id = @id", new
+                {
+                    id
+                });
+            }
+        }
     }
 }

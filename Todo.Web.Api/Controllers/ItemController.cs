@@ -41,12 +41,12 @@ namespace todo_app.Controllers
             return new JsonResult(_itemStore.GetItems());
         }
 
-//
-//        [HttpDelete]
-//        public IActionResult Delete([FromBody]string itemToDeleteKey)
-//        {
-//            _items.Remove(itemToDeleteKey);
-//            return new JsonResult(_items);
-//        }
+
+        [HttpDelete]
+        public IActionResult Delete([FromBody] string itemToDeleteKey)
+        {
+            _itemStore.DeleteItem(itemToDeleteKey);
+            return new JsonResult(_itemStore.GetItems());
+        }
     }
 }

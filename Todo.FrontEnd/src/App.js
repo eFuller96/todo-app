@@ -96,6 +96,12 @@ const App = () => {
     updateItem(item);
   };
 
+  const formatTime = (time) => {
+    const formattedTime =
+      moment(Date.now()).format("l") + " " + moment(time).format("LT");
+    return formattedTime
+  }
+
   const removeItem = (item) => {
     deleteItem(item);
   };
@@ -142,7 +148,7 @@ const App = () => {
                         onClick={() => handleCheck(item)}
                         label={item.name}
                       />
-                      <div className="time-stamp">{item.completedTime}</div>
+                      <div className="time-stamp">{item.completedTime ? formatTime(item.completedTime) : ""}</div>
                       <div
                         onClick={() => removeItem(item)}
                         className="remove-icon"

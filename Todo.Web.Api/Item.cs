@@ -1,3 +1,5 @@
+using System;
+
 namespace todo_app
 {
     public class Item
@@ -6,7 +8,7 @@ namespace todo_app
         
         public string Name { get; set; }
 
-        public string CompletedTime { get; set; } = null;
+        public DateTime? CompletedTime { get; set; } = null;
 
         public bool TaskDone { get; set; } = false;
     }

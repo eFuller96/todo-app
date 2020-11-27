@@ -34,12 +34,13 @@ namespace todo_app.Controllers
             return new JsonResult(_itemStore.GetItems());
         }
 
-//        [HttpPut]
-//        public IActionResult Update([FromBody] Item updatedItem)
-//        {
-//            _items[updatedItem.Id] = updatedItem;
-//            return new JsonResult(_items);
-//        }
+        [HttpPut]
+        public IActionResult Update([FromBody] Item updatedItem)
+        {
+            _itemStore.UpdateItem(updatedItem);
+            return new JsonResult(_itemStore.GetItems());
+        }
+
 //
 //        [HttpDelete]
 //        public IActionResult Delete([FromBody]string itemToDeleteKey)

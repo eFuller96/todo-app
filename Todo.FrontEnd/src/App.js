@@ -89,9 +89,7 @@ const App = () => {
   };
 
   const handleCheck = (item) => {
-    const timeStamp =
-      moment(Date.now()).format("l") + " " + moment(Date.now()).format("LT");
-
+    const timeStamp = moment(Date.now())
     item.taskDone = true;
     item.completedTime = timeStamp;
 

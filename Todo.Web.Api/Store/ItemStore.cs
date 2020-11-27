@@ -34,5 +34,18 @@ namespace todo_app.Store
                 });
             }
         }
+
+        public void UpdateItem(Item item)
+        {
+            using (var conn = new NpgsqlConnection(_dbConnectionString))
+            {
+                conn.Execute("UPDATE items SET taskDone = @taskDone, completedTime = @completedTime WHERE id = @id", new
+                {
+                    taskDone = item.TaskDone,
+                    completedTime = item.CompletedTime,
+                    id = item.Id
+                });
+            }
+        }
     }
 }
